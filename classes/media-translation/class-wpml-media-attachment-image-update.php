@@ -48,12 +48,15 @@ class WPML_Media_Attachment_Image_Update implements IWPML_Action {
 
 					if ( ! is_wp_error( $editor ) ) {
 
-						$resizing = $editor->resize( 150, 150, true );
-						if ( is_wp_error( $resizing ) ) {
-							wp_send_json_error( $resizing->get_error_message() );
-						} else {
-							$thumb = $editor->save();
+						$size = $editor->get_size();
+						if ( $size['width'] > 150 || $size['height'] > 150 ) {
+							$resizing = $editor->resize( 150, 150, true );
+
+							if ( is_wp_error( $resizing ) ) {
+								wp_send_json_error( $resizing->get_error_message() );
+							}
 						}
+						$thumb = $editor->save();
 
 						if ( ! empty( $thumb ) ) {
 							$uploads_dir = wp_get_upload_dir();

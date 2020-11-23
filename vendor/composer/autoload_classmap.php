@@ -80,6 +80,4 @@ return array(
     'WPML_Media_Upgrade' => $baseDir . '/inc/wpml-media-upgrade.class.php',
     'WPML_Media_Usage' => $baseDir . '/classes/media-usage/class-wpml-media-usage.php',
     'WPML_Media_Usage_Factory' => $baseDir . '/classes/media-usage/class-wpml-media-usage-factory.php',
-    'WPML_Media_Welcome_Notice' => $baseDir . '/classes/menus/wpml-media-welcome-notice.php',
-    'WPML_Media_Welcome_Notice_Factory' => $baseDir . '/classes/menus/wpml-media-welcome-notice-factory.php',
 );

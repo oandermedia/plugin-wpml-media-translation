@@ -45,9 +45,11 @@ class WPML_Media_Translated_Images_Update {
 		$imgs = $this->img_parser->get_imgs( $text );
 
 		foreach ( $imgs as $img ) {
-
-			if ( isset( $img['attachment_id'] ) ) {
+			$attachment_id = $translated_id = false;
+			if ( isset( $img['attachment_id'] ) && $img['attachment_id'] ) {
 				$attachment_id  = $img['attachment_id'];
+				$translated_id = apply_filters( 'wpml_object_id', $attachment_id, 'attachment', true,
+					$target_language );
 				$size           = $this->media_sizes->get_attachment_size( $img );
 				$translated_src = $this->image_translator->get_translated_image( $attachment_id, $target_language, $size );
 			} else {
@@ -55,6 +57,9 @@ class WPML_Media_Translated_Images_Update {
 			}
 			if ( $translated_src && $translated_src !== $img['attributes']['src'] ) {
 				$text = $this->replace_image_src( $text, $img['attributes']['src'], $translated_src );
+			}
+			if ( $attachment_id && $attachment_id !== $translated_id ) {
+				$text = $this->replace_att_class( $text, $attachment_id, $translated_id );
 			}
 
 		}
@@ -71,6 +76,19 @@ class WPML_Media_Translated_Images_Update {
 	 */
 	private function replace_image_src( $text, $from, $to ) {
 		return str_replace( $from, $to, $text );
+	}
+
+	/**
+	 * @param string $text
+	 * @param string $from
+	 * @param string $to
+	 *
+	 * @return string
+	 */
+	private function replace_att_class( $text, $from, $to ) {
+		$pattern        = '/\bwp-image-'. $from .'\b/u';
+		$replacement    = 'wp-image-'.$to;
+		return preg_replace( $pattern, $replacement, $text );
 	}
 
 	/**

@@ -236,11 +236,13 @@ class WPML_Media_Post_Images_Translation implements IWPML_Action {
 
 			}
 
-			$new_caption_shortcode = $this->replace_caption_id_with_translated_id(
-				$new_caption_shortcode,
-				$attachment_id,
-				$language
-			);
+			if ( $attachment_id ) {
+				$new_caption_shortcode = $this->replace_caption_id_with_translated_id(
+					$new_caption_shortcode,
+					$attachment_id,
+					$language
+				);
+			}
 
 			if ( $new_caption_shortcode !== $caption_shortcode ) {
 				$text                                     = str_replace( $caption_shortcode, $new_caption_shortcode, $text );
