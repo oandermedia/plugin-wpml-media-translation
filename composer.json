@@ -2,7 +2,7 @@
   "name": "oander/wpml-media-translation",
   "homepage": "https://wpml.org/",
   "description": "The WordPress Multilingual Plugin",
-  "version": "2.5.5",
+  "version": "2.6.1",
   "type": "wordpress-plugin",
   "require": {
     "php": ">=5.6",

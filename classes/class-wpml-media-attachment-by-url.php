@@ -37,6 +37,10 @@ class WPML_Media_Attachment_By_URL {
 	}
 
 	public function get_id() {
+		if ( ! $this->url ) {
+			return 0;
+		}
+
 		$cache_key = self::CACHE_KEY_PREFIX . md5( $this->language . '#' . $this->url );
 
 		$attachment_id = wp_cache_get( $cache_key, self::CACHE_GROUP, false, $this->cache_hit_flag );

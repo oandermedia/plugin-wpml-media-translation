@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
 		dialogClass:   'otgs-ui-dialog wpml-media-dialog wpml-dialog-translate',
 		title:         wpml_media_popup.title,
 		create:        function () {
-			$('#jquery-ui-style-css').attr('disabled', 'disabled');
+			$('#jquery-ui-style-css').prop('disabled', true);
 		},
 		open:          function (event, ui) {
 			$('.ui-dialog-titlebar-close', ui.dialog | ui).hide();
@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
 			}
 		},
 		close:         function () {
-			$('#jquery-ui-style-css').removeAttr('disabled');
+			$('#jquery-ui-style-css').prop('disabled', false);
 			if (WPML_Media_Batch_Url_Translation.hasDialog) {
 				WPML_Media_Batch_Url_Translation.showDialog();
 			}
